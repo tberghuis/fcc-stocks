@@ -25,21 +25,26 @@ router.get("/financedata", function(req, res) {
         return [date.getTime(), adjClose];
       });
       data.reverse();
+      console.log("data historical", data);
       return { quotes: data };
     });
 
   let pSummary = yahooFinance
     .quote(symbol, ["summaryProfile", "price"])
     .then(data => {
-      console.log("data", data);
+      console.log("data summary", data);
       let { city, website, industry, sector } = data.summaryProfile;
       let { shortName } = data.price;
       return { symbol, name: shortName, city, website, industry, sector };
     });
 
-  Promise.all([pQuotes, pSummary]).then(([quoteData, summaryData]) => {
-    res.json({ ...quoteData, ...summaryData });
-  });
+  Promise.all([pQuotes, pSummary])
+    .catch(error => {
+      console.log("error", error);
+    })
+    .then(([quoteData, summaryData]) => {
+      res.json({ ...quoteData, ...summaryData });
+    });
 });
 
 router.get("/symbols", function(req, res) {
