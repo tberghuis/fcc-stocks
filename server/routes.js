@@ -16,6 +16,7 @@ router.get("/financedata", function(req, res) {
   let pQuotes = yahooFinance
     .historical({
       symbol,
+      from: "2012-01-01",
       period: "d"
     })
     .then(data => {
