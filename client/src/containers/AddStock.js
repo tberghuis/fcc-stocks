@@ -23,7 +23,7 @@ class AddStock extends Component {
       type: "CHART_LOADING_START",
       symbol
     });
-    socket.emit("add symbol", symbol);
+    socket.emit("add symbol", symbol.toUpperCase().trim());
     event.preventDefault();
   };
 
