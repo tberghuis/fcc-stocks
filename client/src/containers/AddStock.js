@@ -15,7 +15,7 @@ const Form = styled.form`
 
 class AddStock extends Component {
   handleSubmit = event => {
-    let symbol = this.input.value.toUpperCase();
+    let symbol = this.input.value.toUpperCase().trim();
 
     // if doing rewrite i would do
     // validation first
@@ -23,7 +23,7 @@ class AddStock extends Component {
       type: "CHART_LOADING_START",
       symbol
     });
-    socket.emit("add symbol", symbol.toUpperCase().trim());
+    socket.emit("add symbol", symbol);
     event.preventDefault();
   };
 
