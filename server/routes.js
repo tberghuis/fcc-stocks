@@ -3,7 +3,7 @@ var router = express.Router();
 var yahooFinance = require("yahoo-finance");
 
 router.get("/financedata", function(req, res) {
-  var symbol = req.query.symbol;
+  var symbol = req.query.symbol.toUpperCase().trim();
 
   // error if symbol ! in GLOB_SYMBOLS
   if (GLOB_SYMBOLS.indexOf(symbol) === -1) {

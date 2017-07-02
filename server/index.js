@@ -16,7 +16,7 @@ GLOB_SYMBOLS = [];
 
 io.on("connection", function(socket) {
   socket.on("add symbol", async function(symbol) {
-    symbol = symbol.toUpperCase();
+    symbol = symbol.toUpperCase().trim();
     // if exist exit
     if (GLOB_SYMBOLS.indexOf(symbol) > -1) {
       // emit ERROR only to single client
@@ -36,7 +36,7 @@ io.on("connection", function(socket) {
   });
 
   socket.on("remove symbol", function(symbol) {
-    symbol = symbol.toUpperCase();
+    symbol = symbol.toUpperCase().trim();
     // if !exist exit
     let index = GLOB_SYMBOLS.indexOf(symbol);
     if (index === -1) {
